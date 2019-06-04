@@ -24,32 +24,28 @@
 
 <body>
     <canvas id="my-house" width="300" height="300"></canvas>
-    <canvas id="arabic-word" width="600" height="800"></canvas>
+    <canvas id="arabic-word" width="610" height="810"></canvas>
 </body>
 
 </html>
 <script>
     const canvas2 = document.getElementById('arabic-word');
     const ctx2 = canvas2.getContext('2d');
+    /* :::::::::::::::: Grid ::::::::::::::::*/
     const ctxGRID = canvas2.getContext('2d');
     ctxGRID.lineWidth = 1;
     // ctxGRID.strokeStyle = "#FF0000";
     ctxGRID.font = "10px Arial";
-
-    for (let x = 0; x < 600; x += 50) {
+    for (let x = 0; x <= 600; x += 50) {
         ctxGRID.fillText("(" + x + ")", x, 10);
-        for (let y = 0; y < 800; y += 100) {
+        for (let y = 0; y <= 800; y += 50) {
+            ctxGRID.fillText("(" + y + ")", 10, y + 10);
             ctxGRID.moveTo(x, y);
-            ctxGRID.lineTo(x, y + 10);
+            ctxGRID.lineTo(x, y + 1);
         }
-
-
-
     }
     ctxGRID.stroke();
-
     // ctx2.strokeStyle = "#000000";
-
     let p = {
         startX: 0,
         startY: 0,
@@ -57,9 +53,6 @@
         endY: 0
     }
     ctx2.lineWidth = 5;
-
-
-
     /* :::::::::::::::: Letter 1 ::::::::::::::::*/
     p.endX = 500;
     p.endY = 100;
@@ -131,7 +124,6 @@
     // drawP(ctx2, p)
     /* -----------------------------------
     --------------------------------------*/
-
     ctx2.stroke();
     function set_p(x, y, dx, dy) {
         let p = {

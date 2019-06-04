@@ -23,60 +23,47 @@
 </head>
 
 <body>
-
     <canvas id="my-house" width="300" height="300"></canvas>
-
     <canvas id="arabic-word" width="600" height="800"></canvas>
-
 </body>
 
 </html>
 <script>
-    // const canvas1 = document.getElementById('my-house');
     const canvas2 = document.getElementById('arabic-word');
-
-    // const ctx1 = canvas1.getContext('2d');
     const ctx2 = canvas2.getContext('2d');
 
-    // Set line width
-    // ctx1.lineWidth = 10;
     ctx2.lineWidth = 5;
 
-    /* 
-    // Wall
-    ctx1.strokeRect(75, 140, 150, 110);
+    /*::::::::::::::::  Part  1 ::::::::::::::::*/
+    dx = 30;
+    dy = - 30;
 
-    // Door
-    ctx1.fillRect(130, 190, 40, 60);
+    let p;
+    p = set_p(500, 100, dx, dy);
+    drawP(ctx2, p)
+    /*::::::::::::::::  Part  1 ::::::::::::::::*/
+    dx = 0;
+    dy = 200;
+    p = set_p(p.endX, p.endY, dx, dy);
 
-    // Roof
-    ctx1.moveTo(50, 140);
-    ctx1.lineTo(150, 60);
-    ctx1.lineTo(250, 140);
-    ctx1.closePath();
-    ctx1.stroke(); 
-    */
-
-    // arabic word
-    let p = {
-        startX: 0,
-        startY: 0,
-        endX: 0,
-        endY: 0
-    }
-
-
-    p.startX = 400;
-    p.startY = 100;
-
-    dx = 100;
-    dy = 0;
-
-    p.endX = p.startX + dx;
-    p.endY = p.startY + dy;
-
-    ctx2.moveTo(p.startX, p.startY);
-    ctx2.lineTo(p.endX, p.endY);
-
+    drawP(ctx2, p)
+    // -------------------
     ctx2.stroke();
+    function set_p(x, y, dx, dy) {
+        let p = {
+            startX: 0,
+            startY: 0,
+            endX: 0,
+            endY: 0
+        }
+        p.startX = x;
+        p.startY = y;
+        p.endX = p.startX + dx;
+        p.endY = p.startY + dy;
+        return p;
+    }
+    function drawP(ctx2, p) {
+        ctx2.moveTo(p.startX, p.startY);
+        ctx2.lineTo(p.endX, p.endY);
+    }
 </script>

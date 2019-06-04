@@ -31,23 +31,107 @@
 <script>
     const canvas2 = document.getElementById('arabic-word');
     const ctx2 = canvas2.getContext('2d');
+    const ctxGRID = canvas2.getContext('2d');
+    ctxGRID.lineWidth = 1;
+    // ctxGRID.strokeStyle = "#FF0000";
+    ctxGRID.font = "10px Arial";
 
+    for (let x = 0; x < 600; x += 50) {
+        ctxGRID.fillText("(" + x + ")", x, 10);
+        for (let y = 0; y < 800; y += 100) {
+            ctxGRID.moveTo(x, y);
+            ctxGRID.lineTo(x, y + 10);
+        }
+
+
+
+    }
+    ctxGRID.stroke();
+
+    // ctx2.strokeStyle = "#000000";
+
+    let p = {
+        startX: 0,
+        startY: 0,
+        endX: 0,
+        endY: 0
+    }
     ctx2.lineWidth = 5;
 
-    /*::::::::::::::::  Part  1 ::::::::::::::::*/
+
+
+    /* :::::::::::::::: Letter 1 ::::::::::::::::*/
+    p.endX = 500;
+    p.endY = 100;
+    /*----------  Part  1 ----------*/
     dx = 30;
     dy = - 30;
-
-    let p;
-    p = set_p(500, 100, dx, dy);
+    p = set_p(p.endX, p.endY, dx, dy);
     drawP(ctx2, p)
-    /*::::::::::::::::  Part  1 ::::::::::::::::*/
+    /*----------  Part  2 ----------*/
     dx = 0;
     dy = 200;
     p = set_p(p.endX, p.endY, dx, dy);
-
     drawP(ctx2, p)
-    // -------------------
+    /*----------  Part  3 ----------*/
+    dx = -30;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  4 ----------*/
+    dx = 0;
+    dy = -170;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /* :::::::::::::::: Letter 2 ::::::::::::::::*/
+    p.endX = 440;
+    p.endY = 100;
+    /*----------  Part  1 ----------*/
+    dx = 30;
+    dy = - 30;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  2 ----------*/
+    dx = 0;
+    dy = 200;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  3 ----------*/
+    dx = -30;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  4 ----------*/
+    dx = -40;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  5 ----------*/
+    dx = 0;
+    dy = -40;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  6 ----------*/
+    dx = 40;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /*----------  Part  7 ----------*/
+    dx = 0;
+    dy = -130;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    /* :::::::::::::::: Letter 3 ::::::::::::::::*/
+    // p.endX = 440;
+    // p.endY = 100;
+    // /*----------  Part  1 ----------*/
+    // dx = 30;
+    // dy = - 30;
+    // p = set_p(p.endX, p.endY, dx, dy);
+    // drawP(ctx2, p)
+    /* -----------------------------------
+    --------------------------------------*/
+
     ctx2.stroke();
     function set_p(x, y, dx, dy) {
         let p = {

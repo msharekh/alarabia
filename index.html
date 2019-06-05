@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>canvas document</title>
+    <title>Canvas 2D</title>
     <style>
         #my-house {
             width: 150px;
@@ -24,7 +24,7 @@
 
 <body>
     <canvas id="my-house" width="300" height="300"></canvas>
-    <canvas id="arabic-word" width="610" height="810"></canvas>
+    <canvas id="arabic-word" width="930" height="810"></canvas>
 </body>
 
 </html>
@@ -36,16 +36,11 @@
     ctxGRID.lineWidth = 1;
     // ctxGRID.strokeStyle = "#FF0000";
     ctxGRID.font = "10px Arial";
-    for (let x = 0; x <= 600; x += 50) {
-        ctxGRID.fillText("(" + x + ")", x, 10);
-        for (let y = 0; y <= 800; y += 50) {
-            ctxGRID.fillText("(" + y + ")", 10, y + 10);
-            ctxGRID.moveTo(x, y);
-            ctxGRID.lineTo(x, y + 1);
-        }
-    }
-    ctxGRID.stroke();
-    // ctx2.strokeStyle = "#000000";
+    let letters = []
+    let letter;
+    let b = 50;
+    let lx = 100;
+    let hb = 50 / 2;
     let p = {
         startX: 0,
         startY: 0,
@@ -53,78 +48,235 @@
         endY: 0
     }
     ctx2.lineWidth = 5;
+    for (let x = 0; x <= 1000; x += b) {
+        ctxGRID.fillText("(" + x + ")", x, 10);
+        for (let y = 0; y <= 800; y += b) {
+            ctxGRID.fillText("(" + y + ")", 10, y + 10);
+            ctxGRID.moveTo(x, y);
+            ctxGRID.lineTo(x, y + 1);
+        }
+    }
+    ctxGRID.stroke();
+    // ctx2.strokeStyle = "#000000";
     /* :::::::::::::::: Letter 1 ::::::::::::::::*/
-    p.endX = 500;
-    p.endY = 100;
-    /*----------  Part  1 ----------*/
-    dx = 30;
-    dy = - 30;
-    p = set_p(p.endX, p.endY, dx, dy);
-    drawP(ctx2, p)
-    /*----------  Part  2 ----------*/
+    startP = [900, 100]
+    letter = {
+        name: 'ALEF',
+        moves: []
+    }
+    p.endX = startP[0];
+    p.endY = startP[1];
+    startP = [p.endX, p.endY]
+    /*----------  Part  1 ----D------*/
     dx = 0;
-    dy = 200;
+    dy = 300;
     p = set_p(p.endX, p.endY, dx, dy);
-    drawP(ctx2, p)
-    /*----------  Part  3 ----------*/
-    dx = -30;
+    drawP(ctx2, p);
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  2 ----L------*/
+    dx = -b;
     dy = 0;
     p = set_p(p.endX, p.endY, dx, dy);
-    drawP(ctx2, p)
-    /*----------  Part  4 ----------*/
+    drawP(ctx2, p);
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  3 -----U-----*/
     dx = 0;
-    dy = -170;
+    dy = -250;
     p = set_p(p.endX, p.endY, dx, dy);
-    drawP(ctx2, p)
+    drawP(ctx2, p);
+    letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  4 -----U/R-----*/
+    dx = b;
+    dy = - b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p);
+    letter.moves.push({ dir: 'UR', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    //-----.....---------.....---------.....----
+    letters.push(letter);
     /* :::::::::::::::: Letter 2 ::::::::::::::::*/
-    p.endX = 440;
-    p.endY = 100;
-    /*----------  Part  1 ----------*/
-    dx = 30;
-    dy = - 30;
-    p = set_p(p.endX, p.endY, dx, dy);
-    drawP(ctx2, p)
-    /*----------  Part  2 ----------*/
+    letter = {
+        name: 'LAM',
+        moves: []
+    }
+
+    p.endX = startP[0] - lx;
+    p.endY = startP[1];
+    startP = [p.endX, p.endY]
+    /*----------  Part  1 ------D----*/
     dx = 0;
-    dy = 200;
+    dy = 300;
     p = set_p(p.endX, p.endY, dx, dy);
     drawP(ctx2, p)
-    /*----------  Part  3 ----------*/
-    dx = -30;
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  2 ------L---*/
+    dx = -100;
     dy = 0;
     p = set_p(p.endX, p.endY, dx, dy);
     drawP(ctx2, p)
-    /*----------  Part  4 ----------*/
-    dx = -40;
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  3 ------U----*/
+    dx = 0;
+    dy = -b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  4 -----R-----*/
+    dx = b;
     dy = 0;
     p = set_p(p.endX, p.endY, dx, dy);
     drawP(ctx2, p)
-    /*----------  Part  5 ----------*/
+    letter.moves.push({ dir: 'R', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  5 -------U---*/
     dx = 0;
-    dy = -40;
+    dy = -200;
     p = set_p(p.endX, p.endY, dx, dy);
     drawP(ctx2, p)
-    /*----------  Part  6 ----------*/
-    dx = 40;
-    dy = 0;
+    letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    // /*----------  Part  6 ------UR----*/
+    dx = b;
+    dy = -b;
     p = set_p(p.endX, p.endY, dx, dy);
     drawP(ctx2, p)
-    /*----------  Part  7 ----------*/
-    dx = 0;
-    dy = -130;
-    p = set_p(p.endX, p.endY, dx, dy);
-    drawP(ctx2, p)
+    letter.moves.push({ dir: 'UR', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    //-----.....---------.....---------.....----
+    letters.push(letter);
     /* :::::::::::::::: Letter 3 ::::::::::::::::*/
-    // p.endX = 440;
-    // p.endY = 100;
-    // /*----------  Part  1 ----------*/
-    // dx = 30;
-    // dy = - 30;
-    // p = set_p(p.endX, p.endY, dx, dy);
-    // drawP(ctx2, p)
+    letter = {
+        name: 'AEEN',
+        moves: []
+    }
+
+    p.endX = startP[0] - lx;
+    p.endY = startP[1] + 250;
+    startP = [p.endX, p.endY]
+    /*----------  Part  1 ------L----*/
+    dx = -b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  2 ------UP----*/
+    dx = b;
+    dy = -b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'UR', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  3 ------U----*/
+    dx = 0;
+    dy = -b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  4 ------L----*/
+    dx = -2 * b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  5 ------D----*/
+    dx = 0;
+    dy = b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  6 ------DR----*/
+    dx = b;
+    dy = b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'DR', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  7 ------L----*/
+    dx = -b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  8 ------D----*/
+    dx = 0;
+    dy = b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  9 ------R----*/
+    dx = 3 * b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'R', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    //-----.....---------.....---------.....----
+    letters.push(letter);
+    /* :::::::::::::::: Letter 4 ::::::::::::::::*/
+    letter = {
+        name: 'RAA',
+        moves: []
+    }
+
+    p.endX = startP[0] - lx;
+    p.endY = startP[1] + 0;
+    startP = [p.endX, p.endY]
+    /*----------  Part  1 ------L----*/
+    dx = -b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  2 ------D----*/
+    dx = 0;
+    dy = 2 * b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  3 ------L----*/
+    dx = -b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  4 ------D----*/
+    dx = 0;
+    dy = b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  5 ------R----*/
+    dx = 2 * b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'R', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  6 ------U----*/
+    dx = 0;
+    dy = -2 * b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    //-----.....---------.....---------.....----
+    letters.push(letter);
     /* -----------------------------------
     --------------------------------------*/
     ctx2.stroke();
+    console.log('letters', ':	', letters);
+    function dir(d, v) {
+        let pos = []
+        switch (d) {
+            case 'U':
+                pos = [0, -v];
+                break;
+            case 'UR':
+                pos = [0, -v];
+                break;
+            case 'D':
+                pos = [0, v];
+                break;
+            case 'R':
+                pos = [v, 0];
+                break;
+            case 'L':
+                pos = [0, -v];
+                break; default:
+                break;
+        }
+    }
     function set_p(x, y, dx, dy) {
         let p = {
             startX: 0,

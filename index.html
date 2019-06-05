@@ -98,7 +98,6 @@
         name: 'LAM',
         moves: []
     }
-
     p.endX = startP[0] - lx;
     p.endY = startP[1];
     startP = [p.endX, p.endY]
@@ -145,7 +144,6 @@
         name: 'AEEN',
         moves: []
     }
-
     p.endX = startP[0] - lx;
     p.endY = startP[1] + 250;
     startP = [p.endX, p.endY]
@@ -210,7 +208,6 @@
         name: 'RAA',
         moves: []
     }
-
     p.endX = startP[0] - lx;
     p.endY = startP[1] + 0;
     startP = [p.endX, p.endY]
@@ -257,7 +254,6 @@
         name: 'BA',
         moves: []
     }
-
     p.endX = startP[0] - lx;
     p.endY = startP[1] - b;
     startP = [p.endX, p.endY]
@@ -298,9 +294,7 @@
     drawP(ctx2, p)
     letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
     /*----------  Part  7 ------DOT----*/
-
-    p = set_p(p.endX, p.endY, dx, dy);
-    // drawP(ctx2, p)
+    drawPoint(400, 450, b);
     // letter.moves.push({ dir: 'DOT', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
     //-----.....---------.....---------.....----
     letters.push(letter);
@@ -328,6 +322,18 @@
                 break; default:
                 break;
         }
+    }
+    function drawPoint(x, y, b) {
+        p = set_p(x, y, b, 0);
+        drawP(ctx2, p)
+        p = set_p(x + b, y, 0, b);
+        drawP(ctx2, p)
+        p = set_p(x + b, y + b, -b, 0);
+        drawP(ctx2, p)
+        p = set_p(x + b, y + b, -b, 0);
+        drawP(ctx2, p)
+        p = set_p(x, y + b, 0, -b);
+        drawP(ctx2, p)
     }
     function set_p(x, y, dx, dy) {
         let p = {

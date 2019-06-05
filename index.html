@@ -252,6 +252,58 @@
     letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
     //-----.....---------.....---------.....----
     letters.push(letter);
+    /* :::::::::::::::: Letter 4 ::::::::::::::::*/
+    letter = {
+        name: 'BA',
+        moves: []
+    }
+
+    p.endX = startP[0] - lx;
+    p.endY = startP[1] - b;
+    startP = [p.endX, p.endY]
+    /*----------  Part  1 ------L----*/
+    dx = -b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  2 ------D----*/
+    dx = 0;
+    dy = b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  3 ------L----*/
+    dx = -b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'L', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  4 ------D----*/
+    dx = 0;
+    dy = b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'D', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  5 ------R----*/
+    dx = 2 * b;
+    dy = 0;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'R', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  6 ------U----*/
+    dx = 0;
+    dy = - 2 * b;
+    p = set_p(p.endX, p.endY, dx, dy);
+    drawP(ctx2, p)
+    letter.moves.push({ dir: 'U', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    /*----------  Part  7 ------DOT----*/
+
+    p = set_p(p.endX, p.endY, dx, dy);
+    // drawP(ctx2, p)
+    // letter.moves.push({ dir: 'DOT', dx: dx, dy: dy, endX: p.endX, endY: p.endY });
+    //-----.....---------.....---------.....----
+    letters.push(letter);
     /* -----------------------------------
     --------------------------------------*/
     ctx2.stroke();
